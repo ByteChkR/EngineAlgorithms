@@ -14,7 +14,7 @@ public:
 	static CollisionManager* instance;
 	CollisionManager();
 	~CollisionManager();
-	void CheckCollisions();
+	int CheckCollisions();
 	static std::vector<Collider*> _activeCollider;
 };
 

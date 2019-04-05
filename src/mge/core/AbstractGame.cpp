@@ -91,6 +91,7 @@ void AbstractGame::_initializeWorld() {
 
 void AbstractGame::run()
 {
+	new Debug(); //Setting up Debug
 	//setting to calculate fps
 	sf::Clock renderClock;
 	int frameCount = 0;
@@ -98,7 +99,7 @@ void AbstractGame::run()
 	sf::Clock lagClock;
 	float timeSinceLastFPSCalculation = 0;
 
-	sf::Time benchmarkTime = sf::seconds(30000);
+	sf::Time benchmarkTime = sf::seconds(30);
 	sf::Time currentTime = sf::Time::Zero;
 
 	sf::Time delta;
@@ -108,6 +109,8 @@ void AbstractGame::run()
 	sf::Clock updateClock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	sf::Time realDeltaTime = sf::Time::Zero;
+
+	int collisionChecksperFrame = 0;
 	//TODO: Replace while condition to exit at specific time(NOT FRAME COUNT)
 	while (_window->isOpen() && benchmarkTime > currentTime) {
 		delta = updateClock.restart();
@@ -123,7 +126,7 @@ void AbstractGame::run()
 				realDeltaTime = timePerFrame + lag;
 				timeSinceLastUpdate -= realDeltaTime; //The Lag is added to the timeperframe
 				_update(realDeltaTime.asSeconds());
-				CollisionManager::instance->CheckCollisions();
+				collisionChecksperFrame = CollisionManager::instance->CheckCollisions();
 				//float a = 0;
 				//for (size_t i = 0; i < 1000000; i++)
 				//{
@@ -132,7 +135,7 @@ void AbstractGame::run()
 				//}
 
 				lag = lagClock.restart();
-				///Debug::Log(std::to_string(realDeltaTime.asSeconds()), DebugLevel::FrameTime);
+				Debug::LogCSV(realDeltaTime.asMilliseconds(), collisionChecksperFrame);
 				//Collision Detection
 			}
 
@@ -154,6 +157,7 @@ void AbstractGame::run()
 		_processEvents();
 	}
 
+	Debug::FlushCSV();
 	//After that the game should close and save the logs to a folder with the current timestamp.(No Timestamps pure csv)
 }
 

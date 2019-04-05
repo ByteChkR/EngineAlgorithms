@@ -17,9 +17,8 @@ CollisionManager::~CollisionManager()
 {
 }
 
-void CollisionManager::CheckCollisions()
+int CollisionManager::CheckCollisions()
 {
-	 //Improvement 2: Add Continue to loop to prevent checking objects twice
 
 	int collisionsPerFrame = 0;
 	int actualChecks = 0;
@@ -35,13 +34,13 @@ void CollisionManager::CheckCollisions()
 		for (size_t j = 0; j < _activeCollider.size(); j++)
 		{
 
-			if (j == i)continue; //Prevent checking against itself.
-			actualChecks++;
+			if (j <= i)continue; //Prevent checking against itself.
 
-			
+			//if(!_activeCollider[i]->CheckCirlce(_activeCollider[j]))continue;
+
+			actualChecks++;
 			if (_activeCollider[i]->Check(_activeCollider[j]))
 			{
-				collisionsPerFrame++;
 				_activeCollider[i]->SetHit(true);
 				_activeCollider[j]->SetHit(true);
 				//HIT
@@ -50,8 +49,7 @@ void CollisionManager::CheckCollisions()
 	}
 
 
-	//Debug::Log(std::to_string(actualChecks), DebugLevel::ActualCollisionChecks);
-	//Debug::Log(std::to_string(collisionsPerFrame), DebugLevel::CollisionsPerFrame);
+	return actualChecks;
 
 
 

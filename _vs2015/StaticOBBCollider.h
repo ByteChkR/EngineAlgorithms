@@ -18,9 +18,11 @@ public:
 	void SetHit(bool isHit);
 	static float EPSILON;
 	GameObject* GetOwner();
+	float GetSqrRadius();
 private :
 	bool _isStatic;
 	bool _hasRotation;
+	float _sqrRadius;
 	GameObject* _owner;
 };
 

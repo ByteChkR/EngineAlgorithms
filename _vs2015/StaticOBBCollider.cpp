@@ -12,6 +12,7 @@ Collider::Collider(GameObject* owner, bool isStatic, bool hasRotation, glm::vec3
 	_isStatic = isStatic;
 	_owner = owner;
 	this->halfExtents = halfExtents;
+	_sqrRadius = halfExtents[0] * halfExtents[0] + halfExtents[1] * halfExtents[1] + halfExtents[2] * halfExtents[2];
 	CollisionManager::_activeCollider.push_back(this);
 	//REGISTER IN SOME ARRAY FOR THE COLLISION MANAGER
 }
@@ -83,7 +84,7 @@ bool Collider::Check(Collider* other)
 			halfExtents[2] * ABSR[2][i];
 		rother = other->halfExtents[i];
 		if (glm::abs(
-			aToB[i] * R[0][i] + 
+			aToB[0] * R[0][i] + 
 			aToB[1] * R[1][i] + 
 			aToB[2] * R[2][i]) > rthis + rother)return false;
 	}
@@ -127,7 +128,8 @@ bool Collider::Check(Collider* other)
 
 bool Collider::CheckCirlce(Collider* other)
 {
-	return false;
+	glm::vec3 dist = GetOwner()->getLocalPosition() - other->GetOwner()->getLocalPosition();
+	return dist[0] * dist[0] + dist[1] * dist[1] + dist[2] * dist[2] < other->GetSqrRadius()+ GetSqrRadius();
 	//IMPROVEMENT 1: Adding circle test.
 }
 
@@ -138,4 +140,9 @@ bool Collider::IsStatic()
 {
 	//IMPROVEMENT 3: Only Checking Active Colliders against static colliders.
 	return _isStatic;
+}
+
+float Collider::GetSqrRadius()
+{
+	return _sqrRadius;
 }

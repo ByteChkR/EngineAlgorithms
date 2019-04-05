@@ -94,7 +94,7 @@ void MGEDemo::_initializeScene()
 
 
 
-	for (size_t i = 0; i < 100; i++)
+	for (size_t i = 0; i < 1000; i++)
 	{
 		float r1, r2, r3, r4;
 		r1 = (std::rand() / (float)RAND_MAX);
