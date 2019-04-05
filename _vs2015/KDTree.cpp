@@ -28,7 +28,7 @@ KDNode* KDNode::insert(KDNode* root, float point[], unsigned int depth)
 	{
 		root->right = insert(root->right, point, depth + 1);
 	}
-	//else add the box to the current node.
+	//else add thes box to the current node.
 	
 	return root;
 }

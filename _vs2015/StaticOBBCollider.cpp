@@ -14,7 +14,6 @@ Collider::Collider(GameObject* owner, bool isStatic, bool hasRotation, glm::vec3
 	this->halfExtents = halfExtents;
 	_sqrRadius = halfExtents[0] * halfExtents[0] + halfExtents[1] * halfExtents[1] + halfExtents[2] * halfExtents[2];
 	CollisionManager::_activeCollider.push_back(this);
-	//REGISTER IN SOME ARRAY FOR THE COLLISION MANAGER
 }
 
 void Collider::SetHit(bool isHit)
@@ -130,15 +129,10 @@ bool Collider::CheckCirlce(Collider* other)
 {
 	glm::vec3 dist = GetOwner()->getLocalPosition() - other->GetOwner()->getLocalPosition();
 	return dist[0] * dist[0] + dist[1] * dist[1] + dist[2] * dist[2] < other->GetSqrRadius()+ GetSqrRadius();
-	//IMPROVEMENT 1: Adding circle test.
 }
-
-//IMPROVEMENT 4: If collision occurred on this object already(on this frame) skip further collision tests(we are only changing colors. Thats a practical optimization.
-//				not really an optimization thats applicable for general collision detection but especially useful for this task.
 
 bool Collider::IsStatic()
 {
-	//IMPROVEMENT 3: Only Checking Active Colliders against static colliders.
 	return _isStatic;
 }
 

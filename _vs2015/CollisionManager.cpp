@@ -9,7 +9,6 @@ std::vector<Collider*> CollisionManager::_activeCollider = std::vector<Collider*
 CollisionManager* CollisionManager::instance = nullptr;
 CollisionManager::CollisionManager()
 {
-
 	instance = this;
 }
 
@@ -28,15 +27,17 @@ int CollisionManager::CheckCollisions()
 		_activeCollider[i]->SetHit(false);
 	}
 
+
+
 	for (size_t i = 0; i < _activeCollider.size(); i++)
 	{
-
+		if (_activeCollider[i]->IsStatic())continue;
 		for (size_t j = 0; j < _activeCollider.size(); j++)
 		{
 
-			if (j <= i)continue; //Prevent checking against itself.
+			if (j <= i)continue; //Prevent checking against itself. From 1.000.000 checks to 550.000 checks
 
-			//if(!_activeCollider[i]->CheckCirlce(_activeCollider[j]))continue;
+			if(!_activeCollider[i]->CheckCirlce(_activeCollider[j]))continue; //From 550.000 checks to ~1000
 
 			actualChecks++;
 			if (_activeCollider[i]->Check(_activeCollider[j]))
