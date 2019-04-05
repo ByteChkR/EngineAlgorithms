@@ -9,8 +9,9 @@ const float EPSILON = 0.001f;
 
 struct KDNode
 {
-
-	float point[3];
+	float extends[K];
+	float point[K];
+	bool isEnclosing(KDNode* root, float point[], float extends[], unsigned int cd);
 	std::vector<Collider*> collider;
 	KDNode *left, *right, *parent;
 	KDNode* newNode(float arr[], KDNode* parent);

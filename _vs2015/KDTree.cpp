@@ -144,3 +144,12 @@ KDNode* KDNode::deleteNode(KDNode* root, float point[])
 {
 	return deleteNode(root, point, 0);
 }
+
+
+bool KDNode::isEnclosing(KDNode* root, float point1[], float extends1[], unsigned int cd)
+{
+
+	if (root->point[cd] + root->extends[cd] < point1[cd] + extends1[cd])return false;
+	if (root->point[cd] - root->extends[cd] > point1[cd] - extends1[cd])return false;
+	return true;
+}

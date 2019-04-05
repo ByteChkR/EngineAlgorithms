@@ -32,6 +32,7 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="KDTree.h" />
+    <ClInclude Include="QuadTree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -98,6 +99,9 @@
       <Filter>MGE Source files</Filter>
     </ClCompile>
     <ClCompile Include="KDTree.cpp">
+      <Filter>MGE Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTree.cpp">
       <Filter>MGE Source files</Filter>
     </ClCompile>
   </ItemGroup>
