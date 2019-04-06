@@ -6,6 +6,7 @@
 #include "StaticOBBCollider.h"
 #include "glm.hpp"
 #include <vector>
+#include "QuadTree.h"
 
 
 class CollisionManager
@@ -16,6 +17,7 @@ public:
 	~CollisionManager();
 	int CheckCollisions();
 	static std::vector<Collider*> _activeCollider;
+	static OctTree* _staticColliderTree;
 };
 
 #endif // !COLLISIONMANAGER_HPP

@@ -18,13 +18,16 @@ KDNode* KDNode::insert(KDNode* root, float point[], unsigned int depth)
 {
 	if (root == nullptr)return newNode(point, root);
 
+	//If added collider can not possibly fit into root, return null
+	//If collider can not fit into left or right add to this node
+	//If this node is full, 
 	unsigned int  cd = depth % K;
 
-	if (point[cd] < root->point[cd]) //if box can be enclosed by left
+	if (point[cd] < root->point[cd]) //if box can be entirely enclosed by left
 	{
 		root->left = insert(root->left, point, depth + 1);
 	}
-	else //if box can be enclosed right
+	else //if box can be entirely enclosed right
 	{
 		root->right = insert(root->right, point, depth + 1);
 	}

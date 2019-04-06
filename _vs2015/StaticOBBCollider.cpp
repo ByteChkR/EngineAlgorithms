@@ -13,11 +13,22 @@ Collider::Collider(GameObject* owner, bool isStatic, bool hasRotation, glm::vec3
 	_owner = owner;
 	this->halfExtents = halfExtents;
 	_sqrRadius = halfExtents[0] * halfExtents[0] + halfExtents[1] * halfExtents[1] + halfExtents[2] * halfExtents[2];
-	CollisionManager::_activeCollider.push_back(this);
+	_radius = glm::sqrt(_sqrRadius);
+	if (_isStatic)
+		OctTree::insert(CollisionManager::_staticColliderTree, this);
+	else
+		CollisionManager::_activeCollider.push_back(this);
+
+}
+
+float Collider::GetRadius()
+{
+	return _radius;
 }
 
 void Collider::SetHit(bool isHit)
 {
+	if (GetOwner()->getMaterial() != nullptr)
 	((ColorMaterial*)GetOwner()->getMaterial())->setDiffuseColor(isHit ? glm::vec3(1, 0, 0) : glm::vec3(0, 1, 0));
 }
 
@@ -52,6 +63,7 @@ bool Collider::Check(Collider* other)
 
 	glm::vec3 aToB = other->GetOwner()->getLocalPosition() - GetOwner()->getLocalPosition();
 
+
 	aToB = glm::vec3(
 		glm::dot(aToB, glm::vec3(thisTransform[0])),
 		glm::dot(aToB, glm::vec3(thisTransform[1])),
@@ -83,8 +95,8 @@ bool Collider::Check(Collider* other)
 			halfExtents[2] * ABSR[2][i];
 		rother = other->halfExtents[i];
 		if (glm::abs(
-			aToB[0] * R[0][i] + 
-			aToB[1] * R[1][i] + 
+			aToB[0] * R[0][i] +
+			aToB[1] * R[1][i] +
 			aToB[2] * R[2][i]) > rthis + rother)return false;
 	}
 
@@ -128,7 +140,7 @@ bool Collider::Check(Collider* other)
 bool Collider::CheckCirlce(Collider* other)
 {
 	glm::vec3 dist = GetOwner()->getLocalPosition() - other->GetOwner()->getLocalPosition();
-	return dist[0] * dist[0] + dist[1] * dist[1] + dist[2] * dist[2] < other->GetSqrRadius()+ GetSqrRadius();
+	return dist[0] * dist[0] + dist[1] * dist[1] + dist[2] * dist[2] < other->GetSqrRadius() + GetSqrRadius();
 }
 
 bool Collider::IsStatic()

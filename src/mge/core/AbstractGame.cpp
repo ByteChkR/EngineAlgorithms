@@ -94,6 +94,7 @@ void AbstractGame::run()
 	new Debug(); //Setting up Debug
 	//setting to calculate fps
 	sf::Clock renderClock;
+	sf::Clock physicsTimer;
 	int frameCount = 0;
 	sf::Time lag = sf::Time::Zero;
 	sf::Clock lagClock;
@@ -126,7 +127,12 @@ void AbstractGame::run()
 				realDeltaTime = timePerFrame + lag;
 				timeSinceLastUpdate -= realDeltaTime; //The Lag is added to the timeperframe
 				_update(realDeltaTime.asSeconds());
+
+				physicsTimer.restart();
+
 				collisionChecksperFrame = CollisionManager::instance->CheckCollisions();
+
+
 				//float a = 0;
 				//for (size_t i = 0; i < 1000000; i++)
 				//{
@@ -135,7 +141,7 @@ void AbstractGame::run()
 				//}
 
 				lag = lagClock.restart();
-				Debug::LogCSV(realDeltaTime.asMilliseconds(), collisionChecksperFrame);
+				Debug::LogCSV(physicsTimer.restart().asMilliseconds(), collisionChecksperFrame);
 				//Collision Detection
 			}
 

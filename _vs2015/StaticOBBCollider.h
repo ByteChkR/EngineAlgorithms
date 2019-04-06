@@ -19,10 +19,12 @@ public:
 	static float EPSILON;
 	GameObject* GetOwner();
 	float GetSqrRadius();
+	float GetRadius();
 private :
 	bool _isStatic;
 	bool _hasRotation;
 	float _sqrRadius;
+	float _radius;
 	GameObject* _owner;
 };
 

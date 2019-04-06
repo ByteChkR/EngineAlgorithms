@@ -60,7 +60,7 @@ void MGEDemo::_initializeScene()
 	//SCENE SETUP
 
    //add camera first (it will be updated last)
-	Camera* camera = new Camera("camera", glm::vec3(50, 100, 50));
+	Camera* camera = new Camera("camera", glm::vec3(255, 512, 255));
 	camera->rotate(glm::radians(-90.0f), glm::vec3(1, 0, 0));
 	_world->add(camera);
 	_world->setMainCamera(camera);
@@ -92,33 +92,45 @@ void MGEDemo::_initializeScene()
 	//light->setBehaviour(new KeysBehaviour(25));
 	//_world->add(light);
 
+	//std::srand(-1);
 
-
-	for (size_t i = 0; i < 1000; i++)
+	for (size_t i = 0; i < 3000; i++)
 	{
-		float r1, r2, r3, r4;
+		float r1, r2, r3, r4, r5;
 		r1 = (std::rand() / (float)RAND_MAX);
 		r2 = (std::rand() / (float)RAND_MAX);
+		r5 = (std::rand() / (float)RAND_MAX);
 		r3 = 15 + (std::rand() / (float)RAND_MAX / 10);
 		r4 = 50 + (std::rand() / (float)RAND_MAX / 45);
-		GameObject* box1 = new GameObject("box1", glm::vec3(r1, 0, r2) * 100);
+		GameObject* box1 = new GameObject("box1", glm::vec3(r1, r5, r2) * 512);
 		box1->setMesh(cubeMeshF);
 		box1->setMaterial(new ColorMaterial(glm::vec3(0, 1, 0)));
 
 		box1->setBehaviour(new KeysBehaviour(
 			(std::rand() % 2 == 0) ? r3 : -r3, 
 			(std::rand() % 2 == 0) ? r4 : -r4));
-		box1->setCollider(new Collider(box1, true, true, glm::vec3(1)));
 		_world->add(box1);
+
+		box1->setCollider(new Collider(box1, false, true, glm::vec3(1)));
 	}
+	for (size_t i = 0; i < 3000; i++)
+	{
+		float r1, r2, r3, r4, r5;
+		r1 = (std::rand() / (float)RAND_MAX);
+		r2 = (std::rand() / (float)RAND_MAX);
+		r5 = (std::rand() / (float)RAND_MAX);
+		r3 = 15 + (std::rand() / (float)RAND_MAX / 10);
+		r4 = 50 + (std::rand() / (float)RAND_MAX / 45);
+		GameObject* box1 = new GameObject("box1", glm::vec3(r1, r5, r2) * 512);
+		box1->setMesh(cubeMeshF);
+		box1->setMaterial(new ColorMaterial(glm::vec3(0, 1, 0)));
 
-
-	GameObject* box2 = new GameObject("box2", glm::vec3(2, 0, 2));
-	box2->setMesh(cubeMeshF);
-	box2->setMaterial(new ColorMaterial(glm::vec3(0, 1, 0)));
-	box2->setCollider(new Collider(box2, true, true, glm::vec3(1)));
-	box2->setBehaviour(new KeysBehaviour(25, 75));
-	_world->add(box2);
+		//box1->setBehaviour(new KeysBehaviour(
+		//	(std::rand() % 2 == 0) ? r3 : -r3,
+		//	(std::rand() % 2 == 0) ? r4 : -r4));
+		_world->add(box1);
+		box1->setCollider(new Collider(box1, true, false, glm::vec3(1)));
+	}
 
 }
 
