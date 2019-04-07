@@ -39,7 +39,7 @@ class ShaderProgram
 	    GLint _programId;
 
 	    std::vector<GLuint> _shaderIds;
-
+		static int CurrentProgram;;
 		std::string _readFile(const std::string &pShaderPath);
 		GLuint _compileShader (GLuint pShaderType, const std::string &pShaderSource);
 };

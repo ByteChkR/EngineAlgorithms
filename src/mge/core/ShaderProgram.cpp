@@ -2,6 +2,8 @@
 #include <fstream>
 #include "mge/core/ShaderProgram.hpp"
 
+int ShaderProgram::CurrentProgram = 0;
+
 ShaderProgram::ShaderProgram():_programId(0), _shaderIds() {
     //why does opengl use glCreateProgram and not glGenProgram (1, &_programID)? Who knows:) *shrugs*
     _programId = glCreateProgram();
@@ -101,5 +103,10 @@ GLuint ShaderProgram::getAttribLocation (const std::string& pName) {
 
 void ShaderProgram::use()
 {
-    glUseProgram(_programId);
+	GLint id;
+	glGetIntegerv(GL_CURRENT_PROGRAM, &id);
+	if (_programId != id)
+	{
+		glUseProgram(_programId);
+	}
 }

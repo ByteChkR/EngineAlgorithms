@@ -15,7 +15,10 @@ Collider::Collider(GameObject* owner, bool isStatic, bool hasRotation, glm::vec3
 	_sqrRadius = halfExtents[0] * halfExtents[0] + halfExtents[1] * halfExtents[1] + halfExtents[2] * halfExtents[2];
 	_radius = glm::sqrt(_sqrRadius);
 	if (_isStatic)
+	{
 		OctTree::insert(CollisionManager::_staticColliderTree, this);
+		CollisionManager::_passiveCollider.push_back(this);
+	}
 	else
 		CollisionManager::_activeCollider.push_back(this);
 
@@ -24,6 +27,19 @@ Collider::Collider(GameObject* owner, bool isStatic, bool hasRotation, glm::vec3
 float Collider::GetRadius()
 {
 	return _radius;
+}
+
+void Collider::SkipNext()
+{
+	_skipTreeRemoval = true;
+}
+
+bool Collider::ShouldSkip()
+{
+	bool ret = _skipTreeRemoval;
+	_skipTreeRemoval = false;
+	return ret;
+
 }
 
 void Collider::SetHit(bool isHit)
@@ -50,9 +66,9 @@ bool Collider::Check(Collider* other)
 	otherTransform = other->HasRotation() ? other->GetOwner()->getTransform() : glm::mat4(1);
 
 	glm::mat3 R, ABSR;
-	for (size_t i = 0; i < 3; i++)
+	for (size_t i = 3; --i;)
 	{
-		for (size_t j = 0; j < 3; j++)
+		for (size_t j = 3; --j;)
 		{
 			glm::vec3 thisAxis, otherAxis;
 			thisAxis = glm::vec3(thisTransform[i]);
@@ -60,6 +76,13 @@ bool Collider::Check(Collider* other)
 			R[i][j] = glm::dot(thisAxis, otherAxis);
 		}
 	}
+	//for (size_t i = 0; i < 3; i++)
+	//{
+	//	for (size_t j = 0; j < 3; j++)
+	//	{
+	//		
+	//	}
+	//}
 
 	glm::vec3 aToB = other->GetOwner()->getLocalPosition() - GetOwner()->getLocalPosition();
 
@@ -69,15 +92,15 @@ bool Collider::Check(Collider* other)
 		glm::dot(aToB, glm::vec3(thisTransform[1])),
 		glm::dot(aToB, glm::vec3(thisTransform[2])));
 
-	for (size_t i = 0; i < 3; i++)
+	for (size_t i = 3; --i;)
 	{
-		for (size_t j = 0; j < 3; j++)
+		for (size_t j = 3; --j;)
 		{
 			ABSR[i][j] = glm::abs(R[i][j]) + EPSILON;
 		}
 	}
 
-	for (size_t i = 0; i < 3; i++)
+	for (size_t i = 3; --i;)
 	{
 		rthis = halfExtents[i];
 		rother =
@@ -87,7 +110,7 @@ bool Collider::Check(Collider* other)
 		if (glm::abs(aToB[i]) > rthis + rother)return false;
 	}
 
-	for (size_t i = 0; i < 3; i++)
+	for (size_t i = 3; --i;)
 	{
 		rthis =
 			halfExtents[0] * ABSR[0][i] +

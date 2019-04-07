@@ -50,7 +50,7 @@ void MGEDemo::_initializeScene()
 	_world->setMainCamera(camera);
 
 
-	for (size_t i = 0; i < 3000; i++)
+	for (size_t i = 0; i < currentPreset->_activeCount; i++)
 	{
 		float r1, r2, r3, r4, r5;
 		r1 = (std::rand() / (float)RAND_MAX);
@@ -68,7 +68,7 @@ void MGEDemo::_initializeScene()
 
 		box1->setCollider(new Collider(box1, false, true, glm::vec3(1)));
 	}
-	for (size_t i = 0; i < 3000; i++)
+	for (size_t i = 0; i < currentPreset->_staticCount; i++)
 	{
 		float r1, r2, r3, r4, r5;
 		r1 = (std::rand() / (float)RAND_MAX);

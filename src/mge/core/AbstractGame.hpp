@@ -4,7 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <GL/glew.h>
 #include <string>
-
+#include "../_vs2015/BenchmarkPreset.h"
+#include "../_vs2015/CollisionManager.h"
 class World;
 class Renderer;
 
@@ -24,7 +25,7 @@ class AbstractGame
         virtual void initialize();
         //run the actual process of updating all objects, rendering them and processing events
         virtual void run();
-
+		static BenchmarkPreset* currentPreset;
     protected:
 
         //methods above delegate behaviour to the methods below so that you can override it in a subclass
@@ -54,7 +55,7 @@ class AbstractGame
 		Renderer* _renderer;        //the renderer class to render the world
 		World* _world;              //the root game object that represents our scene
 		float _fps;                 //stores the real fps
-
+		CollisionManager* manager;
     private:
         AbstractGame(const AbstractGame&);
         AbstractGame& operator=(const AbstractGame&);

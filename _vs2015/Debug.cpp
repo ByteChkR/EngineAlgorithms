@@ -1,33 +1,43 @@
 #include "Debug.h"
+#include "mge/core/AbstractGame.hpp"
 
-std::vector<std::pair<int, int>> Debug::logs = std::vector<std::pair<int, int>>(14400);
+std::vector<std::pair<float, int>> Debug::logs = std::vector<std::pair<float, int>>(14400);
 std::ofstream Debug::csv;
 int Debug::current = 0;
 
 Debug::Debug()
 {
-	csv.open(".\\csv\\log"+std::to_string(std::time(nullptr))+".csv");
+	current = 0;
+	csv = std::ofstream();
+	csv.open(".\\csv\\" + AbstractGame::currentPreset->getLogName() + std::to_string(std::time(nullptr)) + ".txt");
 
 }
 
-void Debug::LogCSV(int frameTime, int collisionChecks)
+Debug::~Debug()
 {
-	
-	logs[current] = std::pair<int, int>(frameTime, collisionChecks);
+	logs.clear();
+}
+
+void Debug::LogCSV(float frameTime, int collisionChecks)
+{
+
+	logs[current] = std::pair<float, int>(frameTime, collisionChecks);
 	current++;
 }
 
 void Debug::FlushCSV()
 {
-	for each (std::pair<int, int> pair in logs)
+	std::string germanySucks = "";
+	for each (std::pair<float, int> pair in logs)
 	{
-		csv << std::to_string(pair.first) << ", " << std::to_string(pair.second)  << std::endl;
+		germanySucks = std::to_string(pair.first);
+		csv << germanySucks << ", " << std::to_string(pair.second) << std::endl;
 	}
 }
 
 void Debug::Log(std::string message, DebugLevel DebugLevel)
 {
-		std::cout << message << std::endl;
+	std::cout << message << std::endl;
 }
 
 void Debug::LogError(std::string errorMessage)

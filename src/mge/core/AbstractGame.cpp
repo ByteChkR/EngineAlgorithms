@@ -2,9 +2,10 @@
 
 #include "AbstractGame.hpp"
 #include "mge/core/Renderer.hpp"
-#include "../_vs2015/CollisionManager.h"
 #include "mge/core/World.hpp"
 #include "../_vs2015/Debug.h"
+
+BenchmarkPreset* AbstractGame::currentPreset = nullptr;
 
 AbstractGame::AbstractGame() :_window(NULL), _renderer(NULL), _world(NULL), _fps(0)
 {
@@ -14,6 +15,7 @@ AbstractGame::AbstractGame() :_window(NULL), _renderer(NULL), _world(NULL), _fps
 AbstractGame::~AbstractGame()
 {
 	//dtor
+	delete manager;
 	delete _window;
 	delete _renderer;
 	delete _world;
@@ -83,7 +85,7 @@ void AbstractGame::_initializeWorld() {
 	std::cout << "World initialized." << std::endl << std::endl;
 
 	std::cout << "Initializing Collision Manager...";
-	new CollisionManager();
+	manager = new CollisionManager();
 	std::cout << "Collision Manager initialized.";
 }
 
@@ -100,7 +102,7 @@ void AbstractGame::run()
 	sf::Clock lagClock;
 	float timeSinceLastFPSCalculation = 0;
 
-	sf::Time benchmarkTime = sf::seconds(30);
+	sf::Time benchmarkTime = sf::seconds(currentPreset->_benchmarkTime);
 	sf::Time currentTime = sf::Time::Zero;
 
 	sf::Time delta;
@@ -118,22 +120,27 @@ void AbstractGame::run()
 		timeSinceLastUpdate += delta;
 		currentTime += delta;
 
+
+
+
+		collisionChecksperFrame = 0;
+
 		if (timeSinceLastUpdate > timePerFrame)
 		{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			lagClock.restart(); //Reset the clock because it should only measure the lag within the while loop and not the whole rendering
 
 			while (timeSinceLastUpdate > timePerFrame) {
-				realDeltaTime = timePerFrame + lag;
+				realDeltaTime = timePerFrame+lag;
 				timeSinceLastUpdate -= realDeltaTime; //The Lag is added to the timeperframe
 				_update(realDeltaTime.asSeconds());
 
 				physicsTimer.restart();
 
 				collisionChecksperFrame = CollisionManager::instance->CheckCollisions();
+				Debug::LogCSV(realDeltaTime.asSeconds(), collisionChecksperFrame);
 
 				lag = lagClock.restart();
-				Debug::LogCSV(physicsTimer.restart().asMilliseconds(), collisionChecksperFrame);
 				//Collision Detection
 			}
 

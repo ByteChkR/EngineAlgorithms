@@ -185,6 +185,7 @@
     <ClInclude Include="..\src\mge\materials\TextureMaterial.hpp" />
     <ClInclude Include="..\src\mge\MGEDemo.hpp" />
     <ClInclude Include="..\src\mge\util\DebugHud.hpp" />
+    <ClInclude Include="BenchmarkPreset.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="KDTree.h" />
@@ -210,6 +211,7 @@
     <ClCompile Include="..\src\mge\materials\TextureMaterial.cpp" />
     <ClCompile Include="..\src\mge\MGEDemo.cpp" />
     <ClCompile Include="..\src\mge\util\DebugHud.cpp" />
+    <ClCompile Include="BenchmarkPreset.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="KDTree.cpp" />

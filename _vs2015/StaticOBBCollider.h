@@ -20,8 +20,11 @@ public:
 	GameObject* GetOwner();
 	float GetSqrRadius();
 	float GetRadius();
+	bool ShouldSkip();
+	void SkipNext();
 private :
 	bool _isStatic;
+	bool _skipTreeRemoval;
 	bool _hasRotation;
 	float _sqrRadius;
 	float _radius;

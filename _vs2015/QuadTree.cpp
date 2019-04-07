@@ -1,19 +1,42 @@
 #include "QuadTree.h"
 #include "CollisionManager.h"
+#include "mge/core/AbstractGame.hpp"
 const float OctTree::ROOT_RADIUS = glm::sqrt((float)ROOT_EXTENDS * ROOT_EXTENDS + ROOT_EXTENDS * ROOT_EXTENDS + ROOT_EXTENDS * ROOT_EXTENDS);
+int OctTree::MAX_LEVEL = 0;
 
-int OctTree::addedcoint = 0;
+
+OctTree::~OctTree()
+{
+	delete leftBackBot;
+	delete leftBackTop;
+	delete leftFrontBot;
+	delete leftFrontTop;
+	delete rightBackBot;
+	delete rightBackTop;
+	delete rightFrontBot;
+	delete rightFrontTop;
+}
+
 
 OctTree* OctTree::createTree()
 {
 	OctTree* ret = new OctTree;
+	MAX_LEVEL = AbstractGame::currentPreset->_treeDepth;
 	ret->extend = ROOT_EXTENDS;
 	ret->radius = glm::sqrt((float)ROOT_EXTENDS * ROOT_EXTENDS + ROOT_EXTENDS * ROOT_EXTENDS + ROOT_EXTENDS * ROOT_EXTENDS);;
 	ret->root = nullptr;
+	ret->removeFrame = REMOVAL_DELAY;
 	ret->point = glm::vec3(512);
 	ret->staticCollder = std::vector<Collider*>();
 	ret->dynamicCollder = std::vector<Collider*>();
 	ret->leftBackBot = ret->leftBackTop = ret->leftFrontBot = ret->leftFrontTop = ret->rightBackBot = ret->rightBackTop = ret->rightFrontBot = ret->rightFrontTop = nullptr;
+	ret->octant = Octants::LEFTBACKBOT;
+	if (0 == MAX_LEVEL)
+	{
+		ret->staticCollder.reserve(10);
+		ret->dynamicCollder.reserve(10);
+		CollisionManager::_leafNodes.push_back(ret);
+	}
 	return ret;
 }
 
@@ -26,8 +49,9 @@ OctTree* OctTree::createNode(OctTree* root, Octants octant, unsigned int depth)
 	ret->root = root;
 	ret->point = getChildPosition(root, octant, ret->extend);
 	ret->staticCollder = std::vector<Collider*>();
-
+	ret->octant = octant;
 	ret->dynamicCollder = std::vector<Collider*>();
+	ret->removeFrame = REMOVAL_DELAY;
 	ret->leftBackBot = ret->leftBackTop = ret->leftFrontBot = ret->leftFrontTop = ret->rightBackBot = ret->rightBackTop = ret->rightFrontBot = ret->rightFrontTop = nullptr;
 	if (depth == MAX_LEVEL)
 	{
@@ -233,22 +257,9 @@ void OctTree::ResetColliderHit(OctTree* root)
 	for (size_t i = 0; i < root->staticCollder.size(); ++i)
 	{
 		root->staticCollder[i]->SetHit(false);
+
 	}
 
-	for (size_t i = 0; i < root->dynamicCollder.size(); ++i)
-	{
-
-		root->dynamicCollder[i]->SetHit(false);
-	}
-
-	OctTree::ResetColliderHit(root->leftBackBot);
-	OctTree::ResetColliderHit(root->leftFrontBot);
-	OctTree::ResetColliderHit(root->leftBackTop);
-	OctTree::ResetColliderHit(root->leftFrontTop);
-	OctTree::ResetColliderHit(root->rightBackBot);
-	OctTree::ResetColliderHit(root->rightFrontBot);
-	OctTree::ResetColliderHit(root->rightBackTop);
-	OctTree::ResetColliderHit(root->rightFrontTop);
 
 }
 //
@@ -377,18 +388,24 @@ glm::vec3 OctTree::getChildPosition(OctTree* root, Octants octant, float extend)
 
 void OctTree::add(Collider* object)
 {
+	if ((staticCollder.size() == 0 || dynamicCollder.size() == 0) && removeFrame <= 0)
+		CollisionManager::_leafNodes.push_back(this);
 	if (object->IsStatic())
 		staticCollder.push_back(object);
 	else
 		dynamicCollder.push_back(object);
-}
-
-void OctTree::updateDynamics()
-{
 
 }
 
-void OctTree::updateDynamic(Collider* object)
+bool OctTree::ShouldRemove()
 {
-	
+	if (staticCollder.size() == 0 && dynamicCollder.size() == 0)
+		removeFrame--;
+	else
+		removeFrame = REMOVAL_DELAY;
+	if (removeFrame <= 0)
+	{
+		return true;
+	}
+	return false;
 }

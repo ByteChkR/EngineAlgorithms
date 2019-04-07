@@ -17,6 +17,7 @@ public:
 	~CollisionManager();
 	int CheckCollisions();
 	static std::vector<Collider*> _activeCollider;
+	static std::vector<Collider*> _passiveCollider;
 	static std::vector<OctTree*> _leafNodes;
 	static OctTree* _staticColliderTree;
 	static int actualChecks;

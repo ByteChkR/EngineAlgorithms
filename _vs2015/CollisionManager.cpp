@@ -5,47 +5,106 @@
 #include "glm.hpp"
 #include "QuadTree.h"
 #include <vector>
+#include "mge/core/AbstractGame.hpp"
 
 std::vector<Collider*> CollisionManager::_activeCollider = std::vector<Collider*>();
+std::vector<Collider*> CollisionManager::_passiveCollider = std::vector<Collider*>();
 std::vector<OctTree*> CollisionManager::_leafNodes = std::vector<OctTree*>();
-OctTree* CollisionManager::_staticColliderTree = OctTree::createTree();
+OctTree* CollisionManager::_staticColliderTree = nullptr;
 CollisionManager* CollisionManager::instance = nullptr;
 CollisionManager::CollisionManager()
 {
 	instance = this;
+	_staticColliderTree = OctTree::createTree();
 }
 
 CollisionManager::~CollisionManager()
 {
+	_activeCollider.clear();
+	_passiveCollider.clear();
+	_leafNodes.clear();
+	delete _staticColliderTree;
+	_staticColliderTree = nullptr;
 }
 int CollisionManager::actualChecks = 0;
 int CollisionManager::CheckCollisions()
 {
 
 
+	actualChecks = 0;
 
 
-	OctTree::ResetColliderHit(_staticColliderTree);
 
-	for (size_t j = 0; j < _leafNodes.size(); ++j)
+
+	//for (size_t j = _leafNodes.size(); j--;)
+	//{
+	//	for (size_t i = _leafNodes[j]->dynamicCollder.size(); i--;)
+	//	{
+	//		if (OctTree::isEnclosing(_leafNodes[j]->point, _leafNodes[j]->extend, _leafNodes[j]->dynamicCollder[i]))
+	//		{
+	//			_leafNodes[j]->dynamicCollder[i]->SkipNext();
+	//		}
+	//		else
+	//		{
+	//			_leafNodes[j]->dynamicCollder.erase(_leafNodes[j]->dynamicCollder.begin() + i);
+	//		}
+	//	}
+
+	//	if (_leafNodes[j]->ShouldRemove())
+	//	{
+	//		_leafNodes.erase(_leafNodes.begin() + j);
+	//	}
+	//	//Check if dynamic collider is still in leaf node.
+	//	//if not push up the tree until it intersects. then go backwards into the tree again.
+	//}
+
+	for (size_t i = 0; i < _passiveCollider.size(); i++)
 	{
-		_leafNodes[j]->dynamicCollder.clear();
-		//Check if dynamic collider is still in leaf node.
-		//if not push up the tree until it intersects. then go backwards into the tree again.
+		_passiveCollider[i]->SetHit(false);
 	}
 
-	for (size_t i = 0; i < _activeCollider.size(); ++i)
+	if (AbstractGame::currentPreset->_enableOldDynamicRemoval)
 	{
-		OctTree::insert(_staticColliderTree, _activeCollider[i]);
-	}
-
-	for (size_t i = 0; i < _leafNodes.size(); ++i)
-	{
-		for (size_t j = 0; j < _leafNodes[i]->dynamicCollder.size(); ++j)
+		for (size_t i = 0; i < _leafNodes.size(); i++)
 		{
-			for (size_t x = 0; x < _leafNodes[i]->staticCollder.size(); ++x)
+			_leafNodes[i]->dynamicCollder.clear();
+		}
+	}
+
+	for (size_t i = _activeCollider.size(); i--;)
+	{
+		_activeCollider[i]->SetHit(false);
+		if (AbstractGame::currentPreset->_enableOldDynamicRemoval || !_activeCollider[i]->ShouldSkip())
+			OctTree::insert(_staticColliderTree, _activeCollider[i]);
+	}
+
+	for (size_t i = _leafNodes.size(); i--;)
+	{
+		if (AbstractGame::currentPreset->_enableNodeRemoval && _leafNodes[i]->ShouldRemove())
+		{
+			_leafNodes.erase(_leafNodes.begin() + i);
+			continue;
+		}
+		for (size_t j = _leafNodes[i]->dynamicCollder.size(); j--;)
+		{
+			if (!AbstractGame::currentPreset->_enableOldDynamicRemoval)
 			{
-				if (!_leafNodes[i]->dynamicCollder[j]->CheckCirlce(_leafNodes[i]->staticCollder[x])) continue;
+				if (OctTree::isEnclosing(_leafNodes[i]->point, _leafNodes[i]->extend, _leafNodes[i]->dynamicCollder[j]))
+				{
+					_leafNodes[i]->dynamicCollder[j]->SkipNext();
+				}
+				else
+				{
+					_leafNodes[i]->dynamicCollder.erase(_leafNodes[i]->dynamicCollder.begin() + j);
+					continue;
+				}
+			}
+			
+
+
+			for (size_t x = _leafNodes[i]->staticCollder.size(); x--;)
+			{
+				if (AbstractGame::currentPreset->_enableCircleTest && !_leafNodes[i]->dynamicCollder[j]->CheckCirlce(_leafNodes[i]->staticCollder[x])) continue;
 				actualChecks++;
 				if (_leafNodes[i]->dynamicCollder[j]->Check(_leafNodes[i]->staticCollder[x]))
 				{
@@ -53,10 +112,9 @@ int CollisionManager::CheckCollisions()
 					_leafNodes[i]->staticCollder[x]->SetHit(true);
 				}
 			}
-			for (size_t x = 0; x < _leafNodes[i]->dynamicCollder.size(); ++x)
+			for (size_t x = _leafNodes[i]->dynamicCollder.size(); x--;)
 			{
-				if (x <= j)continue;
-				if (!_leafNodes[i]->dynamicCollder[j]->CheckCirlce(_leafNodes[i]->dynamicCollder[x])) continue;
+				if ((AbstractGame::currentPreset->_enableCircleTest && !_leafNodes[i]->dynamicCollder[j]->CheckCirlce(_leafNodes[i]->dynamicCollder[x])) || x <= j)continue;
 				actualChecks++;
 				if (_leafNodes[i]->dynamicCollder[j]->Check(_leafNodes[i]->dynamicCollder[x]))
 				{

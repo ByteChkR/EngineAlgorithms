@@ -16,9 +16,11 @@ enum Octants
 struct OctTree
 {
 public:
-	static const int MAX_LEVEL = 4;
+	~OctTree();
+	static int MAX_LEVEL;
 	static const int ROOT_EXTENDS = 512;
 	static const float ROOT_RADIUS;
+	static const int REMOVAL_DELAY = 5;
 	OctTree *leftBackTop, *leftFrontTop,
 		*rightBackTop, *rightFrontTop,
 		*leftBackBot, *leftFrontBot,
@@ -26,7 +28,8 @@ public:
 		*root;
 
 	float extend, radius;
-	static int addedcoint;
+	int removeFrame;
+	Octants octant;
 	glm::vec3 point;
 	std::vector<Collider*> dynamicCollder;
 	std::vector<Collider*> staticCollder;
@@ -41,8 +44,7 @@ public:
 	static bool isIntersectingChild(OctTree* root, Octants octant, Collider* object);
 	static bool isIntersecting(glm::vec3 rootPosiion, float rootExtend, Collider* collider);
 	void add(Collider* collider);
-	void updateDynamics();
-	void updateDynamic(Collider* object);
+	bool ShouldRemove();
 	static bool isEnclosing(glm::vec3 rootpoint, float rootextend, Collider* object);
 	static void ResetColliderHit(OctTree* root);
 };
