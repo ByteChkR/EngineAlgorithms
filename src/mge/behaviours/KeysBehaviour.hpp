@@ -2,6 +2,7 @@
 #define KEYSBEHAVIOUR_HPP
 
 #include "mge/behaviours/AbstractBehaviour.hpp"
+#include "glm.hpp"
 
 /**
  * KeysBehaviour allows you to move an object using the keyboard in its own local space.
@@ -11,13 +12,13 @@ class KeysBehaviour : public AbstractBehaviour
 {
 	public:
 	    //move speed is in units per second, turnspeed in degrees per second
-		KeysBehaviour(float pMoveSpeed = 5, float pTurnSpeed = 45);
+		KeysBehaviour(glm::vec3 pMoveSpeed = glm::vec3(5));
 		virtual ~KeysBehaviour();
 		virtual void update( float pStep );
 
     private:
-        float _moveSpeed;
-        float _turnSpeed;
+        glm::vec3 _moveSpeed;
+
 };
 
 #endif // KEYSBEHAVIOUR_HPP

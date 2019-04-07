@@ -16,8 +16,8 @@ enum Octants
 struct OctTree
 {
 public:
-	static const int MAX_LEVEL = 10;
-	static const int ROOT_EXTENDS = 1024;
+	static const int MAX_LEVEL = 4;
+	static const int ROOT_EXTENDS = 512;
 	static const float ROOT_RADIUS;
 	OctTree *leftBackTop, *leftFrontTop,
 		*rightBackTop, *rightFrontTop,
@@ -26,23 +26,24 @@ public:
 		*root;
 
 	float extend, radius;
+	static int addedcoint;
 	glm::vec3 point;
-	std::vector<Collider*> collder;
+	std::vector<Collider*> dynamicCollder;
+	std::vector<Collider*> staticCollder;
 	static OctTree* createTree();
-	static OctTree* createNode(OctTree* root, Octants octant);
-	static OctTree* insert(OctTree* root, Collider* object, unsigned int depth);
-	static OctTree* insert(OctTree* root, Collider* object);
-	static OctTree* remove(OctTree* root, Collider* object);
-	static OctTree* update(OctTree* root);
-	static bool isEnclosing(OctTree* root, Collider* object);
-	static bool isEnclosingChild(OctTree* root, Octants octant, Collider* collider);
-	static glm::vec3 getChildPosition(OctTree* root, Octants octant);
-	static bool isEnclosing(glm::vec3 rootPosiion, float rootExtend, Collider* collider);
+	static OctTree* createNode(OctTree* root, Octants octant, unsigned int depth);
+	static void insert(OctTree* root, Collider* object, unsigned int depth);
+	static void insert(OctTree* root, Collider* object);
+
+	static glm::vec3 getChildPosition(OctTree* root, Octants octant, float extend);
+
+	static bool isIntersecting(OctTree* root, Collider* object);
+	static bool isIntersectingChild(OctTree* root, Octants octant, Collider* object);
 	static bool isIntersecting(glm::vec3 rootPosiion, float rootExtend, Collider* collider);
 	void add(Collider* collider);
-	static OctTree* getSmallestEnclosement(OctTree* root, Collider* collider, unsigned int depth);
-	static OctTree* getSmallestEnclosement(OctTree* root, Collider* collider);
-	static std::vector<Collider*> getPossiblyCollidingColliders(OctTree* containingNode);
+	void updateDynamics();
+	void updateDynamic(Collider* object);
+	static bool isEnclosing(glm::vec3 rootpoint, float rootextend, Collider* object);
 	static void ResetColliderHit(OctTree* root);
 };
 

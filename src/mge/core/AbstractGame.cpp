@@ -132,14 +132,6 @@ void AbstractGame::run()
 
 				collisionChecksperFrame = CollisionManager::instance->CheckCollisions();
 
-
-				//float a = 0;
-				//for (size_t i = 0; i < 1000000; i++)
-				//{
-				//	a = (float)i*lag.asSeconds();
-				//	a += a * a;
-				//}
-
 				lag = lagClock.restart();
 				Debug::LogCSV(physicsTimer.restart().asMilliseconds(), collisionChecksperFrame);
 				//Collision Detection

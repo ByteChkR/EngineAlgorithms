@@ -2,35 +2,34 @@
 #include "mge/core/GameObject.hpp"
 #include <SFML/Window/Keyboard.hpp>
 
-KeysBehaviour::KeysBehaviour(float pMoveSpeed, float pTurnSpeed): AbstractBehaviour(), _moveSpeed(pMoveSpeed), _turnSpeed(pTurnSpeed)
+KeysBehaviour::KeysBehaviour(glm::vec3 pMoveSpeed) : AbstractBehaviour(), _moveSpeed(pMoveSpeed)
 {
+
 }
 
 KeysBehaviour::~KeysBehaviour()
 {
 }
 
-void KeysBehaviour::update( float pStep )
+void KeysBehaviour::update(float pStep)
 {
-	float moveSpeed = 0.0f; //default if no keys
-	float turnSpeed = 0.0f;
 
-	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Up )) {
-		moveSpeed = _moveSpeed;
+	if (_owner->getLocalPosition().x < 0 || _owner->getLocalPosition().x > 1024)
+	{
+		_moveSpeed.x = -_moveSpeed.x;
 	}
-	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Down )) {
-		moveSpeed = -_moveSpeed;
+	else if (_owner->getLocalPosition().y < 0 || _owner->getLocalPosition().y > 1024)
+	{
+		_moveSpeed.y = -_moveSpeed.y;
 	}
-	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Right )) {
-		turnSpeed = -_turnSpeed;
+	else if (_owner->getLocalPosition().z < 0 || _owner->getLocalPosition().z > 1024)
+	{
+		_moveSpeed.z = -_moveSpeed.z;
 	}
-	if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Left )) {
-		turnSpeed = +_turnSpeed;
-	}
-	turnSpeed = _turnSpeed;
-	moveSpeed = _moveSpeed;
 	//translate the object in its own local space
-	_owner->translate( glm::vec3(0.0f, 0.0f, moveSpeed*pStep ) );
+	_owner->setLocalPosition(_owner->getLocalPosition() + _moveSpeed);
+
+
 
 	//we can also translate directly, basically we take the z axis from the matrix
 	//which is normalized and multiply it by moveSpeed*step, then we add it to the
@@ -40,7 +39,7 @@ void KeysBehaviour::update( float pStep )
 	//_owner->setTransform(transform);
 
 	//rotate the object in its own local space
-	_owner->rotate( glm::radians(turnSpeed*pStep), glm::vec3(0.0f, 1.0f, 0.0f ) );
+	//_owner->rotate( glm::radians(turnSpeed*pStep), glm::vec3(1.0f, 1.0f, 0.0f ) );
 
 	//NOTE:
 	//The reason the above happens in the local space of the object and not in the world space

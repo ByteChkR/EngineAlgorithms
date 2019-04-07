@@ -4,7 +4,7 @@
 #include "CollisionManager.h"
 #include "mge/materials/ColorMaterial.hpp"
 
-float Collider::EPSILON = 0.0001;
+float Collider::EPSILON = 0.0001f;
 
 Collider::Collider(GameObject* owner, bool isStatic, bool hasRotation, glm::vec3 halfExtents)
 {
@@ -29,7 +29,7 @@ float Collider::GetRadius()
 void Collider::SetHit(bool isHit)
 {
 	if (GetOwner()->getMaterial() != nullptr)
-	((ColorMaterial*)GetOwner()->getMaterial())->setDiffuseColor(isHit ? glm::vec3(1, 0, 0) : glm::vec3(0, 1, 0));
+		((ColorMaterial*)GetOwner()->getMaterial())->setDiffuseColor(isHit ? glm::vec3(1, 0, 0) : glm::vec3(0, 1, 0));
 }
 
 bool Collider::HasRotation()
@@ -139,8 +139,8 @@ bool Collider::Check(Collider* other)
 
 bool Collider::CheckCirlce(Collider* other)
 {
-	glm::vec3 dist = GetOwner()->getLocalPosition() - other->GetOwner()->getLocalPosition();
-	return dist[0] * dist[0] + dist[1] * dist[1] + dist[2] * dist[2] < other->GetSqrRadius() + GetSqrRadius();
+	float dist = glm::fastDistance(GetOwner()->getLocalPosition(), other->GetOwner()->getLocalPosition());
+	return dist * dist < other->GetSqrRadius() + GetSqrRadius();
 }
 
 bool Collider::IsStatic()
