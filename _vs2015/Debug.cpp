@@ -8,6 +8,7 @@ int Debug::current = 0;
 Debug::Debug()
 {
 	current = 0;
+	logs.clear();
 	csv = std::ofstream();
 	csv.open(".\\csv\\" + AbstractGame::currentPreset->getLogName() + std::to_string(std::time(nullptr)) + ".txt");
 
@@ -16,6 +17,7 @@ Debug::Debug()
 Debug::~Debug()
 {
 	logs.clear();
+	current = 0;
 }
 
 void Debug::LogCSV(float frameTime, int collisionChecks)

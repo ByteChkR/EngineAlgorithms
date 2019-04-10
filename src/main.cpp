@@ -23,23 +23,24 @@ int main()
 {
 	std::vector<BenchmarkPreset> presets = std::vector<BenchmarkPreset>();
 
-	float benchmarkTime = 30;
+	float benchmarkTime = 300;
 
-	for (size_t statics = 1000; statics <= 3000; statics+=1000)
-	{
-		for (size_t dynamics = 1000; dynamics <= 3000; dynamics+=1000)
-		{
-			for (size_t treeDepth = 0; treeDepth < 5; treeDepth++)
-			{
-				for (size_t circle = 0; circle < 2; circle++)
-				{
-					presets.push_back(BenchmarkPreset(benchmarkTime, dynamics, statics, treeDepth, circle, true, false));
-					presets.push_back(BenchmarkPreset(benchmarkTime, dynamics, statics, treeDepth, circle, true, true));
-					presets.push_back(BenchmarkPreset(benchmarkTime, dynamics, statics, treeDepth, circle, false, false));
-				}
-			}
-		}
-	}
+	presets.push_back(BenchmarkPreset(30, 4000, 15000, 4, true, false, false));
+	//for (size_t statics = 1000; statics <= 3000; statics+=1000)
+	//{
+	//	for (size_t dynamics = 1000; dynamics <= 3000; dynamics+=1000)
+	//	{
+	//		for (size_t treeDepth = 0; treeDepth < 5; treeDepth++)
+	//		{
+	//			for (size_t circle = 0; circle < 2; circle++)
+	//			{
+	//				presets.push_back(BenchmarkPreset(benchmarkTime, dynamics, statics, treeDepth, circle, true, false));
+	//				presets.push_back(BenchmarkPreset(benchmarkTime, dynamics, statics, treeDepth, circle, true, true));
+	//				presets.push_back(BenchmarkPreset(benchmarkTime, dynamics, statics, treeDepth, circle, false, false));
+	//			}
+	//		}
+	//	}
+	//}
 
 	for (size_t i = 0; i < presets.size(); i++)
 	{

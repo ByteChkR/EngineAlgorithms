@@ -167,14 +167,6 @@ void GameObject::translate(glm::vec3 pTranslation)
 {
 	
 	setTransform(glm::translate(_transform, pTranslation));
-	if (_collider != nullptr)
-	{
-		//Stored distance to boundary is already including the extends of the collider
-		//Compare (world pos - stored world pos) / stored distance to boundary on each axis positive and
-		//Compare (world pos - stored world pos) / stored distance to boundary on each axis negative
-		//if one axis result is bigger than 1, an update is required.
-
-	}
 }
 
 void GameObject::scale(glm::vec3 pScale)
