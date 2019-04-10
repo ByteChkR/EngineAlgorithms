@@ -35,18 +35,18 @@ public:
 	std::vector<Collider*> staticCollder;
 	static OctTree* createTree();
 	static OctTree* createNode(OctTree* root, Octants octant, unsigned int depth);
-	static void insert(OctTree* root, Collider* object, unsigned int depth);
+	static bool isEnclosing(glm::vec3 rootpoint, float rootextend, Collider* object);
 	static void insert(OctTree* root, Collider* object);
-
-	static glm::vec3 getChildPosition(OctTree* root, Octants octant, float extend);
-
-	static bool isIntersecting(OctTree* root, Collider* object);
-	static bool isIntersectingChild(OctTree* root, Octants octant, Collider* object);
-	static bool isIntersecting(glm::vec3 rootPosiion, float rootExtend, Collider* collider);
 	void add(Collider* collider);
 	bool ShouldRemove();
-	static bool isEnclosing(glm::vec3 rootpoint, float rootextend, Collider* object);
 	static void ResetColliderHit(OctTree* root);
+
+private:
+	inline static void insert(OctTree* root, Collider* object, unsigned int depth);
+	inline static glm::vec3 getChildPosition(OctTree* root, Octants octant, float extend);
+	inline static bool isIntersecting(OctTree* root, Collider* object);
+	inline static bool isIntersectingChild(OctTree* root, Octants octant, Collider* object);
+	inline static bool isIntersecting(glm::vec3 rootPosiion, float rootExtend, Collider* collider);
 };
 
 
