@@ -99,7 +99,7 @@ int CollisionManager::CheckCollisions()
 					continue;
 				}
 			}
-			
+
 
 
 			for (size_t x = _leafNodes[i]->staticCollder.size(); x--;)
@@ -112,9 +112,9 @@ int CollisionManager::CheckCollisions()
 					_leafNodes[i]->staticCollder[x]->SetHit(true);
 				}
 			}
-			for (size_t x = _leafNodes[i]->dynamicCollder.size(); x--;)
+			for (size_t x = _leafNodes[i]->dynamicCollder.size(); j+1 < x--;)
 			{
-				if ((AbstractGame::currentPreset->_enableCircleTest && !_leafNodes[i]->dynamicCollder[j]->CheckCirlce(_leafNodes[i]->dynamicCollder[x])) || x <= j)continue;
+				if ((AbstractGame::currentPreset->_enableCircleTest && !_leafNodes[i]->dynamicCollder[j]->CheckCirlce(_leafNodes[i]->dynamicCollder[x])))continue;
 				actualChecks++;
 				if (_leafNodes[i]->dynamicCollder[j]->Check(_leafNodes[i]->dynamicCollder[x]))
 				{

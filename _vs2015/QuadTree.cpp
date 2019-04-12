@@ -382,8 +382,12 @@ glm::vec3 OctTree::getChildPosition(OctTree* root, Octants octant, float extend)
 	default:
 		break;
 	}
-	return pos;*/
-	return root->point + octants[octant] * extend;
+	return pos; */
+	glm::vec3 ret;
+	ret.x = root->point.x + octants[octant].x * extend;
+	ret.y = root->point.y + octants[octant].y * extend;
+	ret.z = root->point.z + octants[octant].z * extend;
+	return ret;
 }
 
 void OctTree::add(Collider* object)
