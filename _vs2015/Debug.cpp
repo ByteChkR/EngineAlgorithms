@@ -1,7 +1,7 @@
 #include "Debug.h"
 #include "mge/core/AbstractGame.hpp"
 
-std::vector<std::pair<float, int>> Debug::logs = std::vector<std::pair<float, int>>(14400);
+std::vector<std::pair<float, int>> Debug::logs = std::vector<std::pair<float, int>>();
 std::ofstream Debug::csv;
 int Debug::current = 0;
 
@@ -23,7 +23,7 @@ Debug::~Debug()
 void Debug::LogCSV(float frameTime, int collisionChecks)
 {
 
-	logs[current] = std::pair<float, int>(frameTime, collisionChecks);
+	logs.push_back(std::pair<float, int>(frameTime, collisionChecks));
 	current++;
 }
 
