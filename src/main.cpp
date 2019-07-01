@@ -25,13 +25,13 @@ int main()
 
 	float benchmarkTime = 300;
 
-	presets.push_back(BenchmarkPreset(30, 100, 100, 4, true, false, false)); //Base Line
-	presets.push_back(BenchmarkPreset(30, 100, 1000, 4, true, false, false)); //Base Line
-	presets.push_back(BenchmarkPreset(30, 1000, 100, 4, true, false, false)); //Base Line
-	presets.push_back(BenchmarkPreset(30, 1000, 1000, 4, true, false, false)); //Base Line
-	presets.push_back(BenchmarkPreset(30, 250, 250, 4, true, false, false)); //Base Line
-	presets.push_back(BenchmarkPreset(30, 500, 500, 4, true, false, false)); //Base Line
-	presets.push_back(BenchmarkPreset(30, 750, 750, 4, true, false, false)); //Base Line
+	//presets.push_back(BenchmarkPreset(30, 100, 100, 4, true, false, false)); //Base Line
+	//presets.push_back(BenchmarkPreset(30, 100, 1000, 4, true, false, false)); //Base Line
+	//presets.push_back(BenchmarkPreset(30, 1000, 100, 4, true, false, false)); //Base Line
+	//presets.push_back(BenchmarkPreset(30, 1000, 1000, 4, true, false, false)); //Base Line
+	//presets.push_back(BenchmarkPreset(30, 250, 250, 4, true, false, false)); //Base Line
+	//presets.push_back(BenchmarkPreset(30, 500, 500, 4, true, false, false)); //Base Line
+	//presets.push_back(BenchmarkPreset(30, 750, 750, 4, true, false, false)); //Base Line
 	presets.push_back(BenchmarkPreset(30, 3000, 7000, 4, true, false, false)); //Base Line
 
 	//for (size_t statics = 1000; statics <= 3000; statics+=1000)

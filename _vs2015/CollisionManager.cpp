@@ -15,7 +15,10 @@ CollisionManager* CollisionManager::instance = nullptr;
 CollisionManager::CollisionManager()
 {
 	instance = this;
+	_passiveCollider.reserve(7000);
+	_activeCollider.reserve(3000);
 	_staticColliderTree = OctTree::createTree();
+	
 }
 
 CollisionManager::~CollisionManager()
