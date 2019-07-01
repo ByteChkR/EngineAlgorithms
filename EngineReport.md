@@ -1,11 +1,11 @@
-# Engine Algorithms
+Engine Algorithms
 =================
 
 Tim Akerman (448470)
 
 EGE2a
 
-## Contents
+Contents
 ========
 
 [Engine Algorithms 1](#engine-algorithms)
