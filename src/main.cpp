@@ -53,7 +53,16 @@ int main()
 	for (size_t i = 0; i < presets.size(); i++)
 	{
 		std::srand(0);
+		std::cout << std::endl << std::endl << std::endl << std::endl;
 		std::cout << "Starting Preset:" << std::to_string(i) << std::endl;
+		std::cout << "Preset Time:" << presets[i]._benchmarkTime << std::endl;
+		std::cout << "Active Objects:" << presets[i]._activeCount << std::endl;
+		std::cout << "Static Objects:" << presets[i]._staticCount << std::endl;
+		std::cout << "OctTree Depth:" << presets[i]._treeDepth << std::endl;
+		std::cout << "Sphere Test:" << presets[i]._enableCircleTest << std::endl;
+		std::cout << "Node Removal:" << presets[i]._enableNodeRemoval << std::endl;
+		std::cout << "Dynamic Node Removal:" << presets[i]._enableOldDynamicRemoval << std::endl;
+
 		AbstractGame::currentPreset = &presets[i];
 		AbstractGame* game = new MGEDemo();
 		game->initialize();

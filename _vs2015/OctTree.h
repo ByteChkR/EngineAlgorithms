@@ -1,7 +1,7 @@
-#ifndef QUADTREE_HPP
+#ifndef OCTTREE_HPP
 
 
-#define QUADTREE_HPP
+#define OCTTREE_HPP
 
 #include "glm.hpp"
 #include <vector>

@@ -7,7 +7,7 @@ int ShaderProgram::CurrentProgram = 0;
 ShaderProgram::ShaderProgram():_programId(0), _shaderIds() {
     //why does opengl use glCreateProgram and not glGenProgram (1, &_programID)? Who knows:) *shrugs*
     _programId = glCreateProgram();
-    std::cout << std::endl << "Program created with id:" << _programId << std::endl;
+    //std::cout << std::endl << "Program created with id:" << _programId << std::endl;
 }
 
 ShaderProgram::~ShaderProgram() {}
@@ -26,7 +26,7 @@ std::string ShaderProgram::_readFile(const std::string& pShaderPath)
 	std::string contents;
 	std::ifstream file (pShaderPath, std::ios::in);
 	if(file.is_open()){
-		std::cout << "Reading shader file... " << pShaderPath << std::endl;
+		//std::cout << "Reading shader file... " << pShaderPath << std::endl;
 		std::string line = "";
 		while(getline(file, line)) contents += "\n" + line;
 		file.close();
@@ -40,7 +40,7 @@ std::string ShaderProgram::_readFile(const std::string& pShaderPath)
 // compile the code, and detect errors.
 GLuint ShaderProgram::_compileShader(GLuint pShaderType, const std::string& pShaderSource)
 {
-	std::cout << "Compiling shader... " << std::endl;
+	//std::cout << "Compiling shader... " << std::endl;
 	const char * sourcePointer = pShaderSource.c_str();
 	GLuint shaderId = glCreateShader(pShaderType);
 	glShaderSource(shaderId, 1, &sourcePointer, NULL );
@@ -50,7 +50,7 @@ GLuint ShaderProgram::_compileShader(GLuint pShaderType, const std::string& pSha
 	glGetShaderiv( shaderId, GL_COMPILE_STATUS, &compilerResult);
 
 	if (compilerResult) {
-		std::cout << "Shader compiled ok." << std::endl;
+		//std::cout << "Shader compiled ok." << std::endl;
 		return shaderId;
 	} else { // get error message
 	    std::cout << "Shader error:" << std::endl;
@@ -76,7 +76,7 @@ void ShaderProgram::finalize() {
     glGetProgramiv( _programId, GL_LINK_STATUS, &linkResult);
 
     if ( linkResult ) {
-        std::cout << "Program linked ok." << std::endl << std::endl;
+        //std::cout << "Program linked ok." << std::endl << std::endl;
     } else { // error, show message
         std::cout << "Program error:" << std::endl;
 

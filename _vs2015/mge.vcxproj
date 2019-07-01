@@ -189,7 +189,7 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="KDTree.h" />
-    <ClInclude Include="QuadTree.h" />
+    <ClInclude Include="OctTree.h" />
     <ClInclude Include="StaticOBBCollider.h" />
   </ItemGroup>
   <ItemGroup>
@@ -215,7 +215,7 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="KDTree.cpp" />
-    <ClCompile Include="QuadTree.cpp" />
+    <ClCompile Include="OctTree.cpp" />
     <ClCompile Include="StaticOBBCollider.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

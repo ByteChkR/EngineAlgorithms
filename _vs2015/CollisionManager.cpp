@@ -3,7 +3,7 @@
 #include "mge/core/GameObject.hpp"
 #include "Debug.h"
 #include "glm.hpp"
-#include "QuadTree.h"
+#include "OctTree.h"
 #include <vector>
 #include "mge/core/AbstractGame.hpp"
 

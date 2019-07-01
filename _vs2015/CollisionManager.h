@@ -6,7 +6,7 @@
 #include "StaticOBBCollider.h"
 #include "glm.hpp"
 #include <vector>
-#include "QuadTree.h"
+#include "OctTree.h"
 
 
 class CollisionManager

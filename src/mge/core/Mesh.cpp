@@ -65,7 +65,7 @@ Mesh::~Mesh()
  */
 Mesh* Mesh::load(std::string pFilename)
 {
-    std::cout << "Loading " << pFilename << "...";
+    //std::cout << "Loading " << pFilename << "...";
 
 	Mesh* mesh = new Mesh();
 
@@ -179,7 +179,7 @@ Mesh* Mesh::load(std::string pFilename)
 		file.close();
 		mesh->_buffer();
 
-		std::cout << "Mesh loaded and buffered:" << (mesh->_indices.size()/3.0f) << " triangles." << std::endl;
+		//std::cout << "Mesh loaded and buffered:" << (mesh->_indices.size()/3.0f) << " triangles." << std::endl;
 		return mesh;
 	} else {
 		std::cout << "Could not read " << pFilename << std::endl;

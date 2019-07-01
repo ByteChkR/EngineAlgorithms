@@ -5,35 +5,86 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{57a69ec2-ed87-4085-a1d5-7f892ff96382}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\glm.hpp">
       <Filter>MGE Source files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\mge\behaviours\AbstractBehaviour.hpp" />
-    <ClInclude Include="..\src\mge\behaviours\KeysBehaviour.hpp" />
-    <ClInclude Include="..\src\mge\behaviours\RotatingBehaviour.hpp" />
-    <ClInclude Include="..\src\mge\config.hpp" />
-    <ClInclude Include="..\src\mge\core\AbstractGame.hpp" />
-    <ClInclude Include="..\src\mge\core\Camera.hpp" />
-    <ClInclude Include="..\src\mge\core\GameObject.hpp" />
-    <ClInclude Include="..\src\mge\core\Light.hpp" />
-    <ClInclude Include="..\src\mge\core\Mesh.hpp" />
-    <ClInclude Include="..\src\mge\core\Renderer.hpp" />
-    <ClInclude Include="..\src\mge\core\ShaderProgram.hpp" />
-    <ClInclude Include="..\src\mge\core\Texture.hpp" />
-    <ClInclude Include="..\src\mge\core\World.hpp" />
-    <ClInclude Include="..\src\mge\materials\AbstractMaterial.hpp" />
-    <ClInclude Include="..\src\mge\materials\ColorMaterial.hpp" />
-    <ClInclude Include="..\src\mge\materials\TextureMaterial.hpp" />
-    <ClInclude Include="..\src\mge\MGEDemo.hpp" />
-    <ClInclude Include="..\src\mge\util\DebugHud.hpp" />
-    <ClInclude Include="StaticOBBCollider.h" />
-    <ClInclude Include="CollisionManager.h" />
-    <ClInclude Include="Debug.h" />
-    <ClInclude Include="KDTree.h" />
-    <ClInclude Include="QuadTree.h" />
-    <ClInclude Include="BenchmarkPreset.h" />
+    <ClInclude Include="BenchmarkPreset.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\util\DebugHud.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="KDTree.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticOBBCollider.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\behaviours\AbstractBehaviour.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\AbstractGame.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\materials\AbstractMaterial.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\Camera.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\materials\ColorMaterial.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\config.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\GameObject.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\behaviours\KeysBehaviour.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\Light.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\Mesh.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\MGEDemo.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\Renderer.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\behaviours\RotatingBehaviour.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\ShaderProgram.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\Texture.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\materials\TextureMaterial.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\mge\core\World.hpp">
+      <Filter>MGE Source files</Filter>
+    </ClInclude>
+    <ClInclude Include="OctTree.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -87,26 +138,26 @@
     <ClCompile Include="..\src\mge\MGEDemo.cpp">
       <Filter>MGE Source files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\mge\util\DebugHud.cpp">
-      <Filter>MGE Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="StaticOBBCollider.cpp">
-      <Filter>MGE Source files</Filter>
+    <ClCompile Include="BenchmarkPreset.cpp">
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
-      <Filter>MGE Source files</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="Debug.cpp">
-      <Filter>MGE Source files</Filter>
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mge\util\DebugHud.cpp">
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="KDTree.cpp">
-      <Filter>MGE Source files</Filter>
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="QuadTree.cpp">
-      <Filter>MGE Source files</Filter>
+    <ClCompile Include="StaticOBBCollider.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="BenchmarkPreset.cpp">
-      <Filter>MGE Source files</Filter>
+    <ClCompile Include="OctTree.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

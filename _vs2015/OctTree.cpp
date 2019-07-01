@@ -1,4 +1,4 @@
-#include "QuadTree.h"
+#include "OctTree.h"
 #include "CollisionManager.h"
 #include "mge/core/AbstractGame.hpp"
 const float OctTree::ROOT_RADIUS = glm::sqrt((float)ROOT_EXTENDS * ROOT_EXTENDS + ROOT_EXTENDS * ROOT_EXTENDS + ROOT_EXTENDS * ROOT_EXTENDS);

@@ -3,20 +3,20 @@
 
 #include "glm.hpp"
 
-#include "mge/core/Renderer.hpp"
+//#include "mge/core/Renderer.hpp"
 
 #include "mge/core/Mesh.hpp"
 #include "mge/core/World.hpp"
-#include "mge/core/Texture.hpp"
-#include "mge/core/Light.hpp"
+//#include "mge/core/Texture.hpp"
+//#include "mge/core/Light.hpp"
 #include "mge/core/Camera.hpp"
 #include "mge/core/GameObject.hpp"
 
-#include "mge/materials/AbstractMaterial.hpp"
+//#include "mge/materials/AbstractMaterial.hpp"
 #include "mge/materials/ColorMaterial.hpp"
-#include "mge/materials/TextureMaterial.hpp"
+//#include "mge/materials/TextureMaterial.hpp"
 
-#include "mge/behaviours/RotatingBehaviour.hpp"
+//#include "mge/behaviours/RotatingBehaviour.hpp"
 #include "mge/behaviours/KeysBehaviour.hpp"
 
 #include "mge/util/DebugHud.hpp"
@@ -34,9 +34,9 @@ void MGEDemo::initialize() {
 	AbstractGame::initialize();
 
 	//setup the custom part so we can display some text
-	std::cout << "Initializing HUD" << std::endl;
+	//std::cout << "Initializing HUD" << std::endl;
 	_hud = new DebugHud(_window);
-	std::cout << "HUD initialized." << std::endl << std::endl;
+	std::cout << "HUD initialized." << std::endl;
 }
 
 //build the game _world
@@ -50,7 +50,7 @@ void MGEDemo::_initializeScene()
 	_world->setMainCamera(camera);
 
 
-	for (size_t i = 0; i < currentPreset->_activeCount; i++)
+	for (int i = 0; i < currentPreset->_activeCount; i++)
 	{
 		float r1, r2, r3, r4, r5;
 		r1 = (std::rand() / (float)RAND_MAX);
@@ -68,7 +68,7 @@ void MGEDemo::_initializeScene()
 
 		box1->setCollider(new Collider(box1, false, true, glm::vec3(1)));
 	}
-	for (size_t i = 0; i < currentPreset->_staticCount; i++)
+	for (int i = 0; i < currentPreset->_staticCount; i++)
 	{
 		float r1, r2, r3, r4, r5;
 		r1 = (std::rand() / (float)RAND_MAX);
