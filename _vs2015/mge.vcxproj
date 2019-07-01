@@ -190,7 +190,7 @@
     <ClInclude Include="..\src\mge\MGEDemo.hpp" />
     <ClInclude Include="..\src\mge\util\DebugHud.hpp" />
     <ClInclude Include="..\src\OctTree.h" />
-    <ClInclude Include="..\src\StaticOBBCollider.h" />
+    <ClInclude Include="..\src\OBBCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\BenchmarkPreset.cpp" />
@@ -216,7 +216,7 @@
     <ClCompile Include="..\src\mge\MGEDemo.cpp" />
     <ClCompile Include="..\src\mge\util\DebugHud.cpp" />
     <ClCompile Include="..\src\OctTree.cpp" />
-    <ClCompile Include="..\src\StaticOBBCollider.cpp" />
+    <ClCompile Include="..\src\OBBCollider.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

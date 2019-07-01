@@ -1,7 +1,7 @@
 #include <iostream>
 #include "GameObject.hpp"
 #include "mge/behaviours/AbstractBehaviour.hpp"
-#include "../src/StaticOBBCollider.h"
+#include "../src/OBBCollider.h"
 
 GameObject::GameObject(const std::string& pName, const glm::vec3& pPosition )
 :	_name( pName ), _transform( glm::translate( pPosition ) ), _parent(nullptr), _children(),

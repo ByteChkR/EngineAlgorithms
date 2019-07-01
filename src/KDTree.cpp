@@ -1,7 +1,14 @@
+/**
+	Purpose: An unused KDTree implementation that was replaced by an octree during the various improvements I made to the project. I left it in because it could have been useful.
+
+	@author Tim Akermann
+*/
+
+
 #include "KDTree.h"
 #include "glm.hpp"
 
-KDNode* KDNode::newNode(float arr[], KDNode* parent)
+KDNode* KDNode::newNode(const float arr[], KDNode* parent)
 {
 	KDNode* temp = new KDNode;
 
@@ -14,14 +21,14 @@ KDNode* KDNode::newNode(float arr[], KDNode* parent)
 	return temp;
 }
 
-KDNode* KDNode::insert(KDNode* root, float point[], unsigned int depth)
+KDNode* KDNode::insert(KDNode* root, float point[], unsigned int depth) const
 {
 	if (root == nullptr)return newNode(point, root);
 
 	//If added collider can not possibly fit into root, return null
 	//If collider can not fit into left or right add to this node
 	//If this node is full, 
-	unsigned int  cd = depth % K;
+	const unsigned int  cd = depth % K;
 
 	if (point[cd] < root->point[cd]) //if box can be entirely enclosed by left
 	{
@@ -36,12 +43,12 @@ KDNode* KDNode::insert(KDNode* root, float point[], unsigned int depth)
 	return root;
 }
 
-KDNode* KDNode::insert(KDNode* root, float point[])
+KDNode* KDNode::insert(KDNode* root, float point[]) const
 {
 	return insert(root, point, 0);
 }
 
-bool KDNode::comparePoints(float point1[], float point2[])
+bool KDNode::comparePoints(float point1[], float point2[]) const
 {
 	for (size_t i = 0; i < K; i++)
 	{
@@ -50,12 +57,12 @@ bool KDNode::comparePoints(float point1[], float point2[])
 	return true;
 }
 
-bool KDNode::search(KDNode* root, float point[], unsigned int depth)
+bool KDNode::search(KDNode* root, float point[], const unsigned int depth) const
 {
 	if (root == nullptr)return false;
 	if (comparePoints(root->point, point))return true;
 
-	unsigned int cd = depth % K;
+	const unsigned int cd = depth % K;
 
 	if (point[cd] < root->point[cd])
 	{
@@ -64,12 +71,12 @@ bool KDNode::search(KDNode* root, float point[], unsigned int depth)
 	return search(root->right, point, depth + 1);
 }
 
-bool KDNode::search(KDNode* root, float point[])
+bool KDNode::search(KDNode* root, float point[]) const
 {
 	return search(root, point, 0);
 }
 
-KDNode* KDNode::minNode(KDNode* x, KDNode* y, KDNode*z, int d)
+KDNode* KDNode::minNode(KDNode* x, KDNode* y, KDNode*z, const int d)
 {
 	KDNode* res = x;
 	if (y != nullptr && y->point[d] < res->point[d])res = y;
@@ -78,11 +85,11 @@ KDNode* KDNode::minNode(KDNode* x, KDNode* y, KDNode*z, int d)
 	return res;
 }
 
-KDNode* KDNode::findMin(KDNode* root, int d, unsigned int depth)
+KDNode* KDNode::findMin(KDNode* root, const int d, const unsigned int depth) const
 {
 	if (root == nullptr)return nullptr;
 
-	unsigned int cd = depth % K;
+	const unsigned int cd = depth % K;
 
 	if (cd == d)
 	{
@@ -96,12 +103,12 @@ KDNode* KDNode::findMin(KDNode* root, int d, unsigned int depth)
 		findMin(root->right, d, depth + 1), d);
 }
 
-KDNode* KDNode::findMin(KDNode* root, int d)
+KDNode* KDNode::findMin(KDNode* root, const int d) const
 {
 	return findMin(root, d, 0);
 }
 
-void KDNode::copyPoint(float point1[], float point2[])
+void KDNode::copyPoint(float point1[], const float point2[])
 {
 	for (size_t i = 0; i < K; i++)
 	{
@@ -109,12 +116,12 @@ void KDNode::copyPoint(float point1[], float point2[])
 	}
 }
 
-KDNode* KDNode::deleteNode(KDNode* root, float point[], unsigned int depth)
+KDNode* KDNode::deleteNode(KDNode* root, float point[], const unsigned int depth) const
 {
 	if (root == nullptr) return nullptr;
 
 
-	unsigned int cd = depth / K;
+	const unsigned int cd = depth / K;
 	if (comparePoints(root->point, point))
 	{
 		if (root->right != nullptr)
@@ -141,18 +148,20 @@ KDNode* KDNode::deleteNode(KDNode* root, float point[], unsigned int depth)
 			root->right = deleteNode(root->left, point, depth + 1);
 		return root;
 	}
+
+	return nullptr;
 }
 
-KDNode* KDNode::deleteNode(KDNode* root, float point[])
+KDNode* KDNode::deleteNode(KDNode* root, float point[]) const
 {
 	return deleteNode(root, point, 0);
 }
 
 
-bool KDNode::isEnclosing(KDNode* root, float point1[], float extends1[], unsigned int cd)
+bool KDNode::isEnclosing(KDNode* root, const float point[], const float extends[], unsigned int cd)
 {
 
-	if (root->point[cd] + root->extends[cd] < point1[cd] + extends1[cd])return false;
-	if (root->point[cd] - root->extends[cd] > point1[cd] - extends1[cd])return false;
+	if (root->point[cd] + root->extends[cd] < point[cd] + extends[cd])return false;
+	if (root->point[cd] - root->extends[cd] > point[cd] - extends[cd])return false;
 	return true;
 }

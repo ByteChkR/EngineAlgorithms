@@ -11,6 +11,7 @@
 //#include "mge/core/Light.hpp"
 #include "mge/core/Camera.hpp"
 #include "mge/core/GameObject.hpp"
+#include "../src/OBBCollider.h"
 
 //#include "mge/materials/AbstractMaterial.hpp"
 #include "mge/materials/ColorMaterial.hpp"

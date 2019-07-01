@@ -5,7 +5,7 @@
 
 #include "glm.hpp"
 #include <vector>
-#include "StaticOBBCollider.h"
+#include "OBBCollider.h"
 
 enum Octants
 {
@@ -17,7 +17,7 @@ struct OctTree
 {
 public:
 	~OctTree();
-	static int MAX_LEVEL;
+	static unsigned int MAX_LEVEL;
 	static const int ROOT_EXTENDS = 512;
 	static const float ROOT_RADIUS;
 	static const int REMOVAL_DELAY = 5;
@@ -31,8 +31,8 @@ public:
 	int removeFrame;
 	Octants octant;
 	glm::vec3 point;
-	std::vector<Collider*> dynamicCollder;
-	std::vector<Collider*> staticCollder;
+	std::vector<Collider*> dynamicCollider;
+	std::vector<Collider*> staticCollider;
 	static OctTree* createTree();
 	static OctTree* createNode(OctTree* root, Octants octant, unsigned int depth);
 	static bool isEnclosing(glm::vec3 rootpoint, float rootextend, Collider* object);
@@ -46,7 +46,7 @@ private:
 	inline static glm::vec3 getChildPosition(OctTree* root, Octants octant, float extend);
 	inline static bool isIntersecting(OctTree* root, Collider* object);
 	inline static bool isIntersectingChild(OctTree* root, Octants octant, Collider* object);
-	inline static bool isIntersecting(glm::vec3 rootPosiion, float rootExtend, Collider* collider);
+	inline static bool isIntersecting(glm::vec3 rootPosition, float rootExtend, Collider* collider);
 };
 
 

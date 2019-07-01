@@ -30,12 +30,12 @@ void DebugHud::_createDebugHud() {
 	_debugText.setFillColor(sf::Color::White);
 }
 
-void DebugHud::setDebugInfo(std::string pInfo) {
+void DebugHud::setDebugInfo(const std::string pInfo) {
     _debugText.setString(pInfo);
 	_debugText.setPosition(10, 10);
 }
 
-void DebugHud::draw()
+void DebugHud::draw() const
 {
 	//glDisable( GL_CULL_FACE );
 	glActiveTexture(GL_TEXTURE0);

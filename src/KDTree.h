@@ -2,7 +2,7 @@
 
 #define KDTREE_HPP
 #include <vector>
-#include "StaticOBBCollider.h"
+#include "OBBCollider.h"
 
 const int K = 3;
 const float EPSILON = 0.001f;
@@ -11,21 +11,21 @@ struct KDNode
 {
 	float extends[K];
 	float point[K];
-	bool isEnclosing(KDNode* root, float point[], float extends[], unsigned int cd);
+	bool isEnclosing(KDNode* root, const float point[], const float extends[], unsigned int cd);
 	std::vector<Collider*> collider;
 	KDNode *left, *right, *parent;
-	KDNode* newNode(float arr[], KDNode* parent);
-	KDNode* insert(KDNode* root, float point[]);
-	KDNode* insert(KDNode* root, float point[], unsigned int depth);
-	bool comparePoints(float point1[], float point2[]);
-	bool search(KDNode* root, float point[], unsigned int depth);
-	bool search(KDNode* root, float point[]);
-	KDNode* findMin(KDNode* root, int d, unsigned int depth);
-	KDNode* findMin(KDNode* root, int d);
-	KDNode* deleteNode(KDNode* root, float point[], unsigned int depth);
-	KDNode* deleteNode(KDNode* rootm, float point[]);
-	void copyPoint(float point1[], float point2[]);
-	KDNode* minNode(KDNode* x, KDNode* y, KDNode* z, int d);
+	static KDNode* newNode(const float arr[], KDNode* parent);
+	KDNode* insert(KDNode* root, float point[]) const;
+	KDNode* insert(KDNode* root, float point[], unsigned int depth) const;
+	bool comparePoints(float point1[], float point2[]) const;
+	bool search(KDNode* root, float point[], unsigned int depth) const;
+	bool search(KDNode* root, float point[]) const;
+	KDNode* findMin(KDNode* root, int d, unsigned int depth) const;
+	KDNode* findMin(KDNode* root, int d) const;
+	KDNode* deleteNode(KDNode* root, float point[], unsigned int depth) const;
+	KDNode* deleteNode(KDNode* root, float point[]) const;
+	static void copyPoint(float point1[], const float point2[]);
+	static KDNode* minNode(KDNode* x, KDNode* y, KDNode* z, int d);
 
 };
 

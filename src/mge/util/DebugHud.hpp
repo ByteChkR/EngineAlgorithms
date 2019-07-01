@@ -2,7 +2,6 @@
 #define DEBUGHUD_HPP
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
 
 /**
  * Very simple class capable of rendering a simple piece of text through SFML.
@@ -12,7 +11,7 @@ class DebugHud
 	public:
 		DebugHud( sf::RenderWindow * aWindow );
 		virtual ~DebugHud();
-		void draw();
+		void draw() const;
 
 		void setDebugInfo (std::string pInfo);
 
@@ -26,9 +25,9 @@ class DebugHud
 
         void _createDebugHud();
 
-        DebugHud(const DebugHud&);
-        DebugHud& operator=(const DebugHud&);
+        //DebugHud(const DebugHud&);
 
+		//DebugHud& operator=(const DebugHud&);
 };
 
 #endif // DEBUGHUD_HPP

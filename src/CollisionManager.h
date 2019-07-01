@@ -3,7 +3,7 @@
 #define COLLISIONMANAGER_HPP
 
 #include "mge/core/GameObject.hpp"
-#include "StaticOBBCollider.h"
+#include "OBBCollider.h"
 #include "glm.hpp"
 #include <vector>
 #include "OctTree.h"
@@ -15,7 +15,7 @@ public:
 	static CollisionManager* instance;
 	CollisionManager();
 	~CollisionManager();
-	int CheckCollisions();
+	int CheckCollisions() const;
 	static std::vector<Collider*> _activeCollider;
 	static std::vector<Collider*> _passiveCollider;
 	static std::vector<OctTree*> _leafNodes;

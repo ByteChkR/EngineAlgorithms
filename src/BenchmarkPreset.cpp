@@ -1,3 +1,9 @@
+/**
+	Purpose: Holds the parameters of a benchmark configuration
+
+	@author Tim Akermann
+*/
+
 #include "BenchmarkPreset.h"
 
 BenchmarkPreset::BenchmarkPreset(float benchMarkTime, int activeCount, int staticCount, int treeDepth, bool enableCircleTest, bool enableNodeRemoval, bool enableOldDynamicRemoval)
@@ -6,9 +12,11 @@ BenchmarkPreset::BenchmarkPreset(float benchMarkTime, int activeCount, int stati
 
 }
 
-std::string BenchmarkPreset::getLogName()
+
+
+std::string BenchmarkPreset::getLogName() const
 {
-	std::string ret = "";
+	std::string ret="";
 	ret += std::to_string(_activeCount);
 	ret += "Dx";
 	ret += std::to_string(_staticCount);

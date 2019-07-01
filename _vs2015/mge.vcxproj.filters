@@ -82,7 +82,7 @@
     <ClInclude Include="..\src\OctTree.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\StaticOBBCollider.h">
+    <ClInclude Include="..\src\OBBCollider.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
@@ -156,7 +156,7 @@
     <ClCompile Include="..\src\OctTree.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\StaticOBBCollider.cpp">
+    <ClCompile Include="..\src\OBBCollider.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
