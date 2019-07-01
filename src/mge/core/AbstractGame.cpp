@@ -3,7 +3,7 @@
 #include "AbstractGame.hpp"
 #include "mge/core/Renderer.hpp"
 #include "mge/core/World.hpp"
-#include "../_vs2015/Debug.h"
+#include "../src/Debug.h"
 
 BenchmarkPreset* AbstractGame::currentPreset = nullptr;
 

@@ -2,7 +2,7 @@
 #define CONFIG_HPP
 
 #include <string>
-#include "../_vs2015/Debug.h"
+#include "../src/Debug.h"
 namespace config {
 	const std::string MGE_MODEL_PATH("mge/models/");
 	const std::string MGE_TEXTURE_PATH("mge/textures/");

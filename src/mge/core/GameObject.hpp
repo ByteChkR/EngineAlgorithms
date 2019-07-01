@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "glm.hpp"
-#include "../_vs2015/StaticOBBCollider.h"
+#include "../src/StaticOBBCollider.h"
 
 class AbstractCollider;
 class AbstractBehaviour;

@@ -2,7 +2,7 @@
 
 #include "mge/core/AbstractGame.hpp"
 #include "mge/MGEDemo.hpp"
-#include "../_vs2015/BenchmarkPreset.h"
+#include "../src/BenchmarkPreset.h"
 
 /**
  * Main entry point for the Micro Engine.

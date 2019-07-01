@@ -166,7 +166,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\BenchmarkPreset.h" />
+    <ClInclude Include="..\src\CollisionManager.h" />
+    <ClInclude Include="..\src\Debug.h" />
     <ClInclude Include="..\src\glm.hpp" />
+    <ClInclude Include="..\src\KDTree.h" />
     <ClInclude Include="..\src\mge\behaviours\AbstractBehaviour.hpp" />
     <ClInclude Include="..\src\mge\behaviours\KeysBehaviour.hpp" />
     <ClInclude Include="..\src\mge\behaviours\RotatingBehaviour.hpp" />
@@ -185,14 +189,14 @@
     <ClInclude Include="..\src\mge\materials\TextureMaterial.hpp" />
     <ClInclude Include="..\src\mge\MGEDemo.hpp" />
     <ClInclude Include="..\src\mge\util\DebugHud.hpp" />
-    <ClInclude Include="BenchmarkPreset.h" />
-    <ClInclude Include="CollisionManager.h" />
-    <ClInclude Include="Debug.h" />
-    <ClInclude Include="KDTree.h" />
-    <ClInclude Include="OctTree.h" />
-    <ClInclude Include="StaticOBBCollider.h" />
+    <ClInclude Include="..\src\OctTree.h" />
+    <ClInclude Include="..\src\StaticOBBCollider.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\BenchmarkPreset.cpp" />
+    <ClCompile Include="..\src\CollisionManager.cpp" />
+    <ClCompile Include="..\src\Debug.cpp" />
+    <ClCompile Include="..\src\KDTree.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\mge\behaviours\AbstractBehaviour.cpp" />
     <ClCompile Include="..\src\mge\behaviours\KeysBehaviour.cpp" />
@@ -211,12 +215,8 @@
     <ClCompile Include="..\src\mge\materials\TextureMaterial.cpp" />
     <ClCompile Include="..\src\mge\MGEDemo.cpp" />
     <ClCompile Include="..\src\mge\util\DebugHud.cpp" />
-    <ClCompile Include="BenchmarkPreset.cpp" />
-    <ClCompile Include="CollisionManager.cpp" />
-    <ClCompile Include="Debug.cpp" />
-    <ClCompile Include="KDTree.cpp" />
-    <ClCompile Include="OctTree.cpp" />
-    <ClCompile Include="StaticOBBCollider.cpp" />
+    <ClCompile Include="..\src\OctTree.cpp" />
+    <ClCompile Include="..\src\StaticOBBCollider.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

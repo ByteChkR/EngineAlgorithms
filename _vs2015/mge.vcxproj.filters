@@ -13,22 +13,7 @@
     <ClInclude Include="..\src\glm.hpp">
       <Filter>MGE Source files</Filter>
     </ClInclude>
-    <ClInclude Include="BenchmarkPreset.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionManager.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="Debug.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\mge\util\DebugHud.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="KDTree.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticOBBCollider.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\mge\behaviours\AbstractBehaviour.hpp">
@@ -82,7 +67,22 @@
     <ClInclude Include="..\src\mge\core\World.hpp">
       <Filter>MGE Source files</Filter>
     </ClInclude>
-    <ClInclude Include="OctTree.h">
+    <ClInclude Include="..\src\BenchmarkPreset.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CollisionManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Debug.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\KDTree.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\OctTree.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\StaticOBBCollider.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
@@ -138,25 +138,25 @@
     <ClCompile Include="..\src\mge\MGEDemo.cpp">
       <Filter>MGE Source files</Filter>
     </ClCompile>
-    <ClCompile Include="BenchmarkPreset.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionManager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\mge\util\DebugHud.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="KDTree.cpp">
+    <ClCompile Include="..\src\BenchmarkPreset.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="StaticOBBCollider.cpp">
+    <ClCompile Include="..\src\CollisionManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="OctTree.cpp">
+    <ClCompile Include="..\src\Debug.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\KDTree.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OctTree.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StaticOBBCollider.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

@@ -4,8 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <GL/glew.h>
 #include <string>
-#include "../_vs2015/BenchmarkPreset.h"
-#include "../_vs2015/CollisionManager.h"
+#include "../src/BenchmarkPreset.h"
+#include "../src/CollisionManager.h"
 class World;
 class Renderer;
 
